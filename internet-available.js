@@ -32,14 +32,14 @@ function internetAvailable(settings) {
         // DNS Address solved, internet available
         socket.on('response', () => { 
             socket.destroy(() => {
-                resolve();
+                resolve(true);
             });
         });
 
         // Verify for timeout of the request (cannot reach server)
         socket.on('timeout', () => {
             socket.destroy(() => {
-                reject();
+                resolve(false);
             });
         });
     });
